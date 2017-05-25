@@ -1,0 +1,22 @@
+{
+  "name": "eth-blocktime-estimate",
+  "version": "0.1.0",
+  "description": "Estimate the block number at a given point in time",
+  "main": "index.js",
+  "repository": "https://github.com/erkmos/eth-blocktime-estimate",
+  "author": "Erik Mossberg",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint index.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "lodash": "^4.17.4",
+    "web3": "^0.19.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0"
+  }
+}
