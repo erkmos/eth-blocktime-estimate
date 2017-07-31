@@ -8,6 +8,8 @@ npm install -g eth-blocktime-estimate
 
 ## Running
 
+Note this requires that you have a an Ethereum node running locally with the RPC interface enabled on port 8545.
+
 ```eth-blocktime-estimate -b <start timestamp> -d <duration in days>```
 
 ### Options
