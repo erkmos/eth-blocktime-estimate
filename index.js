@@ -7,8 +7,9 @@ const getBlock = Promise.promisify(web3.eth.getBlock);
 
 function getLastNBlocks(count = 701) {
   const currentBlock = web3.eth.blockNumber;
+
   return Promise.map(
-    _.times(count),
+    _.times(Math.min(count, currentBlock)),
     (n) => getBlock(currentBlock - n),
     { concurrency: 10 });
 }
@@ -32,7 +33,7 @@ async function getEstimate(numBlocks = blocksPerDay) {
 
   let lastBlock = blocks[0];
 
-  for (let i = 0; i < numBlocks; i += 1) {
+  for (let i = 0; i < blocks.length; i += 1) {
     const block = blocks[i];
     timediffs.push(Math.abs(block.timestamp - lastBlock.timestamp));
     lastBlock = block;
