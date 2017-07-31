@@ -25,12 +25,12 @@ async function main() {
 
   const startTimestamp = options.begin;
   const endTimestamp = startTimestamp + (86400 * options.duration);
-  const sampleSize = options.target;
+  const sampleSize = options.samplesize;
 
   console.log(`Calculating time between the last ${sampleSize} blocks...`);
   const {
     startBlock, endBlock, blocktime,
-   } = await getBlocks(startTimestamp, endTimestamp);
+  } = await getBlocks(startTimestamp, endTimestamp);
 
   console.log(
     'Blocktime (expected value):', blocktime.toFixed(2), 'seconds');
