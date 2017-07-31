@@ -24,8 +24,9 @@ function getExpectedTime(arr) {
   });
 }
 
-async function expectedBlockTime() {
-  const numBlocks = 5400;
+const blocksPerDay = 5406;
+
+async function getEstimate(numBlocks = blocksPerDay) {
   const blocks = await getLastNBlocks(numBlocks);
   const timediffs = [];
 
@@ -40,33 +41,24 @@ async function expectedBlockTime() {
   return getExpectedTime(timediffs);
 }
 
-function printTimes(timeBetweenBlocks, startTimestamp, endTimestamp) {
+async function getBlocks(startTime, endTime) {
+  const timeBetweenBlocks = await getEstimate();
   const now = Math.trunc(new Date().getTime() / 1000);
   const currentBlock = web3.eth.blockNumber;
 
-  const blocksLeftToStart = Math.trunc(
-    (startTimestamp - now) / timeBetweenBlocks);
-  const blocksToEnd = Math.trunc((endTimestamp - now) / timeBetweenBlocks);
+  const blocksLeftToStart = currentBlock + Math.floor(
+    (startTime - now) / timeBetweenBlocks);
+  const blocksToEnd = currentBlock + Math.floor(
+    (endTime - now) / timeBetweenBlocks);
 
-  console.log(
-    'Blocktime (expected value):', timeBetweenBlocks.toFixed(2), 'seconds');
-  console.log(
-    'Target starting time:', new Date(startTimestamp * 1000).toUTCString());
-  console.log(
-    'Target starting block:', currentBlock + blocksLeftToStart);
-  console.log(
-    'Target ending time:', new Date(endTimestamp * 1000).toUTCString());
-  console.log(
-    'Target ending block:', currentBlock + blocksToEnd);
+  return {
+    startBlock: blocksLeftToStart,
+    endBlock: blocksToEnd,
+    blocktime: timeBetweenBlocks,
+  };
 }
 
-async function main() {
-  const startTimestamp = 1495987200;
-  const endTimestamp = startTimestamp + (86400 * 60);
-
-  console.log('Calculating time between the last 5400 blocks...');
-  const timeBetweenBlocks = await expectedBlockTime();
-  printTimes(timeBetweenBlocks, startTimestamp, endTimestamp);
-}
-
-main();
+module.exports = {
+  getEstimate,
+  getBlocks,
+};
