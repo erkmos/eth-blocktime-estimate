@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const { getBlocks } = require('./');
 const commandLineArgs = require('command-line-args');
 
