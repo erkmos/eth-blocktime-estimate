@@ -3,9 +3,9 @@ const { getBlocks } = require('./');
 const commandLineArgs = require('command-line-args');
 
 const optionDefinitions = [
-  { name: 'begin', alias: 's', type: Number },
+  { name: 'begin', alias: 'b', type: Number },
   { name: 'duration', alias: 'd', type: Number, defaultValue: 30 },
-  { name: 'target', alias: 't', type: Number, defaultValue: 5406 },
+  { name: 'samplesize', alias: 's', type: Number, defaultValue: 5406 },
 ];
 
 function throwIfBlank(name, value) {
@@ -25,9 +25,9 @@ async function main() {
 
   const startTimestamp = options.begin;
   const endTimestamp = startTimestamp + (86400 * options.duration);
-  const blocksPerDay = options.target;
+  const sampleSize = options.target;
 
-  console.log(`Calculating time between the last ${blocksPerDay} blocks...`);
+  console.log(`Calculating time between the last ${sampleSize} blocks...`);
   const {
     startBlock, endBlock, blocktime,
    } = await getBlocks(startTimestamp, endTimestamp);
