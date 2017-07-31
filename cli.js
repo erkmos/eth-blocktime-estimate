@@ -1,11 +1,10 @@
-const { getEstimate, getBlocks } = require('./main');
+const { getBlocks } = require('./');
 const commandLineArgs = require('command-line-args');
-const Web3 = require('web3');
-const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 
 const optionDefinitions = [
   { name: 'begin', alias: 's', type: Number },
   { name: 'duration', alias: 'd', type: Number, defaultValue: 30 },
+  { name: 'target', alias: 't', type: Number, defaultValue: 5406 },
 ];
 
 function throwIfBlank(name, value) {
@@ -19,14 +18,13 @@ function checkArguments({ begin, duration }) {
   throwIfBlank('duration', duration);
 }
 
-const blocksPerDay = 5406;
-
 async function main() {
   const options = commandLineArgs(optionDefinitions);
   checkArguments(options);
 
   const startTimestamp = options.begin;
   const endTimestamp = startTimestamp + (86400 * options.duration);
+  const blocksPerDay = options.target;
 
   console.log(`Calculating time between the last ${blocksPerDay} blocks...`);
   const {
