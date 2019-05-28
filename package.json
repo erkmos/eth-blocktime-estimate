@@ -11,7 +11,7 @@
     "lint": "eslint index.js"
   },
   "dependencies": {
-    "bluebird": "3.5.0",
+    "bluebird": "3.5.5",
     "command-line-args": "^4.0.6",
     "lodash": "4.17.4",
     "web3": "0.19.1"
