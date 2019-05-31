@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "bluebird": "3.5.5",
-    "command-line-args": "^4.0.6",
+    "command-line-args": "^5.1.1",
     "lodash": "4.17.11",
     "web3": "0.20.7"
   },
