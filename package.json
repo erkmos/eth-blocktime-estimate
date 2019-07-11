@@ -13,7 +13,7 @@
   "dependencies": {
     "bluebird": "3.5.5",
     "command-line-args": "^5.1.1",
-    "lodash": "4.17.11",
+    "lodash": "4.17.13",
     "web3": "0.20.7"
   },
   "devDependencies": {
